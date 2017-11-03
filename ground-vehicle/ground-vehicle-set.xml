@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <sim>
+    <description>Follow Me</description>
+    <author>Gijs de Rooy</author>
+    <status>early production</status>
+
+  <startup>
+    <splash-texture>Aircraft/ground-vehicle/ground-vehicle.png</splash-texture>
+  </startup>
+    
+  <!--:::::::::::::::::::: JSBSim :::::::::::::::::::::::::::-->
+    <flight-model>jsb</flight-model>
+    <aero>ground-vehicle</aero>
+
+  <!--:::::::::::::::: GRAPHICAL MODEL ::::::::::::::::::::::-->
+    <model>
+      <path>Aircraft/ground-vehicle/Models/ground-vehicle.xml</path>
+      <livery>
+	<file type="string"/>
+      </livery>
+    </model> 
+
+  <!--:::::::::::::::::::: VIEWS ::::::::::::::::::::::::::::-->
+  <!-- Settings for the standard views                       -->
+  <!-- x = to the right                                      -->
+  <!-- y = up                                                -->
+  <!-- z = backwards                                         -->
+    <view n="0">
+      <internal archive="y">true</internal>
+      <config>
+	<x-offset-m archive="y" type="double">-0.35</x-offset-m>
+	<y-offset-m archive="y" type="double">1.35</y-offset-m>
+	<z-offset-m archive="y" type="double">1.88</z-offset-m>
+	<pitch-offset-deg>-10.0</pitch-offset-deg>
+	<field-of-view>65</field-of-view>
+      </config>
+    </view>
+
+    <view n="1">
+      <config>
+	<target-y-offset-m archive="y" type="double">1.6</target-y-offset-m>
+      </config>
+    </view>
+    
+    <view n="2">
+      <config>
+	<target-y-offset-m archive="y" type="double">1.6</target-y-offset-m>
+      </config>
+    </view>
+    
+    <view n="3">
+      <config>
+	<target-y-offset-m archive="y" type="double">1.6</target-y-offset-m>
+      </config>
+    </view>
+    
+    <view n="4">
+      <config>
+	<target-y-offset-m archive="y" type="double">1.6</target-y-offset-m>
+      </config>
+    </view>
+    
+    <view n="5">
+      <config>
+	<target-y-offset-m archive="y" type="double">1.6</target-y-offset-m>
+      </config>
+    </view>
+    
+    <view n="6">
+      <config>
+	<target-y-offset-m archive="y" type="double">1.6</target-y-offset-m>
+      </config>
+    </view>
+
+    <hud>
+      <enable3d>false</enable3d>
+    </hud>
+
+
+
+  <!--::::::::::::::::::: MULTIPLAY :::::::::::::::::::::::::-->
+  <!-- Variables that use multiplay/AI system                --> 
+    <multiplay>
+      <chat_display>1</chat_display>
+      <generic>
+	<string n="0" alias="/sim/multiplay/callsign"/>
+	<float n="0" alias="/position/posx"/>
+	<float n="1" alias="/position/posy"/>
+      </generic>
+    </multiplay>
+
+  </sim>
+
+  <!--:::::::::::::::::::::: NASAL ::::::::::::::::::::::::::-->
+  <!-- Nasal based scripts                                   --> 
+  <nasal>
+    <ground-vehicle>
+     <file>Aircraft/ground-vehicle/Systems/main.nas</file>
+     <file>Aircraft/ground-vehicle/Systems/positioning.nas</file>
+     <file>Aircraft/ground-vehicle/Systems/multiagent.nas</file>
+      <script>
+        setlistener("/sim/signals/fdm-initialized", func {
+        var left  = screen.display.new(20, 10);
+	left.add("/position/posx");
+        left.add("/position/posy");
+	
+        var right = screen.display.new(-250, 10);
+        right.add("/apm/airspeed");
+        right.add("/apm/altitude");
+        right.add("/orientation/heading-degrees");
+
+        });
+      </script>
+    </ground-vehicle>
+    <ground-vehicle>
+      <file>Aircraft/ground-vehicle/Nasal/systems.nas</file>        
+    </ground-vehicle>
+  </nasal>
+
+  <!-- Does not seem to do anything -->
+  <engines>
+    <engine n="0">
+      <rpm type="double">2</rpm>
+    </engine>
+    <engine n="1">
+      <rpm type="double">2</rpm>
+    </engine>
+  </engines>
+
+  <controls>
+    <flight>
+      <aileron alias="/controls/flight/rudder" />
+    </flight>
+    <lighting>
+      <headlight>0</headlight>
+      <indicator-left>0</indicator-left>
+      <indicator-right>0</indicator-right>
+      <warning>1</warning>
+    </lighting>
+  </controls>
+
+
+</PropertyList>
+
+
+
+
