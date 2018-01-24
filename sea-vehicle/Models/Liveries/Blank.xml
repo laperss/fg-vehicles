@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+ <sim>
+  <model>
+   <livery>
+    <name type="string">Blank</name>
+    <index type="int">3</index>
+    <texture>MTB_20m.png</texture>
+   </livery>
+  </model>
+ </sim>
+</PropertyList>

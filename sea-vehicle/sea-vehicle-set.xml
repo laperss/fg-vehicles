@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2012 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+  -->
+<PropertyList>
+  <sim>
+
+    <description>Swedish Navy 20m T21 class motor torpedo boat.</description>
+    <author>Anders Gidenstam</author>
+    <aircraft-version>2017-06-08</aircraft-version>
+
+    <long-description>
+      The Swedish Navy T21 motor torpedo boat class was developed during the first years of WWII. The 20 m long boats were powered by two 1500 hp Isotta Fraschini IF184 supercharged petrol engines giving a top speed of about 50 knots. The armament consisted of two 53 cm torpedoes, a 20 mm AA cannon and up to 6 depth charges. The design was provided by the Italian companies Baglietto and CRDA but the 11 boats of the class were manufactured at the Kockums shipyard in Sweden during 1942-43. They remained in service until the late 1950s, and some were retained for special purposes much longer.
+    </long-description>
+
+    <tags>
+      <tag>seacraft</tag>
+      <tag>piston</tag>
+      <tag>supercharged</tag>
+      <tag>twin-engine</tag>
+      <tag>ww2</tag>
+      <tag>1940s</tag>
+      <tag>1950s</tag>
+    </tags>
+
+    <status type="string">alpha</status>
+    <rating>
+      <FDM type="int">2</FDM>
+      <systems type="int">1</systems>
+      <cockpit type="int">0</cockpit>
+      <model type="int">1</model>
+    </rating>
+
+    <flight-model>jsb</flight-model>
+    <aero>sea-vehicle</aero>
+    <!-- The higher rate seems to aide stability. -->
+    <model-hz type="double">960.0</model-hz>
+
+    <presets>
+      <onground type="bool">true</onground>
+      <!-- altitude-agl-ft type="double">6.0</altitude-agl-ft -->
+    </presets>
+    <startup>
+      <splash-texture>Aircraft/sea-vehicle/splash.png</splash-texture>
+    </startup>
+
+    <!-- 3d model -->
+    <model>
+      <path>Aircraft/sea-vehicle/Models/MTB_20m.xml</path>
+      <livery>
+	<file type="string">T21</file>
+      </livery>
+    </model>
+
+    <!-- Views -->
+    <view n="0">
+      <!-- Pilot's position. -->
+      <name>Pilot View</name>
+      <internal>true</internal>
+      <config>
+	<!-- x/y/z == right/up/back -->
+	<x-offset-m type="double">  0.000 </x-offset-m>
+	<y-offset-m type="double">  2.000 </y-offset-m>
+	<z-offset-m type="double">  9.600 </z-offset-m>
+	<pitch-offset-deg type="double"> 0.0 </pitch-offset-deg>
+      </config>
+    </view>
+    <view n="100">
+      <!-- Moving deck view. -->
+      <name>Deck View</name>
+      <internal>true</internal>
+      <config>
+	<!-- x/y/z == right/up/back -->
+	<from-model type="bool">true</from-model>
+	<from-model-idx type="int">0</from-model-idx>
+	<x-offset-m type="double">  0.7 </x-offset-m>
+	<y-offset-m type="double">  2.0 </y-offset-m>
+	<z-offset-m type="double"> 10.5 </z-offset-m>
+	<pitch-offset-deg type="double"> -10.0 </pitch-offset-deg>
+	<default-field-of-view-deg type="double"> 65 </default-field-of-view-deg>
+      </config>
+    </view>
+
+    <!-- Move the center of the external views. -->
+    <view n="1">
+      <config>
+	<target-z-offset-m> 10.0 </target-z-offset-m>
+      </config>
+    </view>
+    <view n="2">
+      <config>
+	<target-z-offset-m> 10.0 </target-z-offset-m>
+      </config>
+    </view>
+    <view n="3">
+      <config>
+	<target-z-offset-m> 10.0 </target-z-offset-m>
+      </config>
+    </view>
+    <view n="5">
+      <config>
+	<target-z-offset-m> 10.0 </target-z-offset-m>
+      </config>
+    </view>
+    <view n="6">
+      <config>
+	<target-z-offset-m> 10.0 </target-z-offset-m>
+      </config>
+    </view>
+
+    <chase-distance-m type="double">-80.0</chase-distance-m>
+
+    <sound>
+      <audible>true</audible>
+      <path>Aircraft/sea-vehicle/Sounds/sound.xml</path>
+    </sound>
+
+    <!-- Aircraft specific help. -->
+    <help include="help.xml"/>
+
+    <systems>
+      <electrical>
+	<path> </path>
+      </electrical>
+    </systems>
+    <instrumentation>
+      <path>Aircraft/sea-vehicle/Systems/instrumentation.xml</path>
+    </instrumentation>
+
+    <multiplay>
+      <generic>
+	<float n="0" alias="/environment/waves/time-sec"/>
+	<float n="1" alias="/environment/waves/from-deg"/>
+	<float n="2" alias="/environment/waves/amplitude-ft"/>
+	<float n="3" alias="/environment/waves/angular-frequency-rad_sec"/>
+	<float n="4" alias="/environment/waves/wave-number-rad_ft"/>
+	<float n="5" alias="/fdm/jsbsim/hydro/height-agl-ft"/>
+      </generic>
+    </multiplay>
+
+    <max-simtime-per-frame n="0" type="double">0.1</max-simtime-per-frame>
+
+    <menubar>
+      <default>
+	<menu n="100">
+	  <label>Swedish Navy 20m MTB</label>
+	  <item>
+	    <label>About</label>
+	    <binding>
+	      <command>nasal</command>
+	      <script>MTB20m.about()</script>
+	    </binding>
+	  </item>
+	  <item>
+	    <label>Select Livery</label>
+	    <binding>
+	      <command>nasal</command>
+	      <script>aircraft.livery.dialog.toggle()</script>
+	    </binding>
+	  </item>
+	</menu>
+      </default>
+    </menubar>
+
+  </sim>
+
+  <controls>
+    <engines>
+      <engine n="0">
+	<magnetos>3</magnetos>
+	<starter>true</starter>
+	<throttle>0.0</throttle>
+	<!-- throttle n="0" alias="/fdm/jsbsim/fcs/throttle-cmd-norm[0]"/>
+	     <mixture  n="0" alias="/fdm/jsbsim/fcs/mixture-cmd-norm[0]"/ -->
+      </engine>
+      <engine n="1">
+	<magnetos>3</magnetos>
+	<starter>true</starter>
+	<throttle>0.0</throttle>     
+	<!-- throttle n="0" alias="/fdm/jsbsim/fcs/throttle-cmd-norm[1]"/>
+	     <mixture  n="0" alias="/fdm/jsbsim/fcs/mixture-cmd-norm[1]"/ -->
+      </engine>
+      <engine n="2">
+	<starter>true</starter>
+	<magnetos>3</magnetos>
+	<throttle>0.0</throttle>
+	<!-- throttle n="0" alias="/fdm/jsbsim/fcs/throttle-cmd-norm[2]"/>
+	     <mixture  n="0" alias="/fdm/jsbsim/fcs/mixture-cmd-norm[2]"/ -->
+      </engine>
+      <engine n="3">
+	<starter>true</starter>
+	<magnetos>3</magnetos>
+	<throttle>0.0</throttle>
+	<!-- throttle n="0" alias="/fdm/jsbsim/fcs/throttle-cmd-norm[3]"/>
+	     <mixture  n="0" alias="/fdm/jsbsim/fcs/mixture-cmd-norm[3]"/ -->
+      </engine>
+      <transmission n="0">
+	<clutch  alias="/fdm/jsbsim/fcs/clutch-cmd-norm[0]"/>    
+	<reverse alias="/fdm/jsbsim/fcs/reverse-cmd-norm[0]"/>    
+      </transmission>
+      <transmission n="1">
+	<clutch  alias="/fdm/jsbsim/fcs/clutch-cmd-norm[1]"/>    
+	<reverse alias="/fdm/jsbsim/fcs/reverse-cmd-norm[1]"/>    
+      </transmission>
+    </engines>
+    <armament>
+      <training-mode type="bool">0</training-mode>
+      <!-- Left side -->
+      <station n="0">
+	<present type="bool">1</present>
+      </station>
+      <!-- Right side -->
+      <station n="1">
+	<present type="bool">1</present>
+      </station>
+    </armament>
+  </controls>
+  <engines>
+    <propeller n="0">
+      <rpm alias="/fdm/jsbsim/propulsion/propeller[0]/rpm"/>    
+    </propeller>
+    <propeller n="1">
+      <rpm alias="/fdm/jsbsim/propulsion/propeller[1]/rpm"/>    
+    </propeller>
+  </engines>
+
+  <payload>
+    <weight>
+      <name type="string">Fore debug trim weight</name>
+      <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+      <min-lb type="double">0.0</min-lb>
+      <max-lb type="double">5000.0</max-lb>
+    </weight>
+    <weight>
+      <name type="string">Aft debug trim weight</name>
+      <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+      <min-lb type="double">0.0</min-lb>
+      <max-lb type="double">5000.0</max-lb>
+    </weight>
+  </payload>
+
+
+  <!-- NASAL SCRIPTS -->
+  <nasal>
+    <!-- Initalizing the nasal scripts -->
+    <MTB20m>
+      <file>Aircraft/sea-vehicle/Systems/MTB20m.nas</file>
+      <file>Aircraft/sea-vehicle/Systems/main.nas</file>
+    </MTB20m>
+    <!-- Walk View -->
+    <walkview>
+      <file>Aircraft/Generic/WalkView/walkview.nas</file>
+    </walkview>
+    <walkviews>
+      <file>Aircraft/sea-vehicle/Systems/walk-views.nas</file>
+    </walkviews>
+    <positioning>
+     <file>Aircraft/Generic/positioning.nas</file>
+    </positioning>
+  </nasal>
+
+  <input>
+    <keyboard include="Aircraft/Generic/WalkView/walk-view-keys.xml">
+      <!-- Keyboard commands -->
+      <key n="113">
+	<name>q</name>
+	<desc>Engage the main engines</desc>
+	<repeatable type="bool">false</repeatable>
+	<binding>
+	  <command>nasal</command>
+	  <script>
+	    gui.popupTip("Engaging the main engines.");
+	    foreach (var c; MTB20m.clutches) {
+            c.setDoubleValue(1.0);
+	    }
+	    controls.selectEngine(0);
+	    controls.selectEngines(1, 0, 1);
+	  </script>
+	</binding>
+      </key>
+      <key n="81">
+	<name>Q</name>
+	<desc>Disengage the main engines</desc>
+	<repeatable type="bool">false</repeatable>
+	<binding>
+	  <command>nasal</command>
+	  <script>
+	    gui.popupTip("Disengaging the main engines.");
+	    foreach (var c; MTB20m.clutches) {
+            c.setDoubleValue(math.min(0.0, c.getValue()));
+	    }
+	    controls.selectEngine(0);
+	    controls.selectEngines(1, 0, 1);
+	  </script>
+	</binding>
+      </key>
+
+      <key n="101">
+	<name>e</name>
+	<desc>Engage the auxiliary engines</desc>
+	<repeatable type="bool">false</repeatable>
+	<binding>
+	  <command>nasal</command>
+	  <script>
+	    gui.popupTip("Engaging the auxiliary engines.");
+	    foreach (var c; MTB20m.clutches) {
+            c.setDoubleValue(-1.0);
+	    }
+	    controls.selectEngine(2);
+	    controls.selectEngines(1, 2, 3);
+	  </script>
+	</binding>
+      </key>
+      <key n="69">
+	<name>E</name>
+	<desc>Disengage the auxiliary engines</desc>
+	<repeatable type="bool">false</repeatable>
+	<binding>
+	  <command>nasal</command>
+	  <script>
+	    gui.popupTip("Disengaging the auxiliary engines.");
+	    foreach (var c; MTB20m.clutches) {
+            c.setDoubleValue(math.max(0.0, c.getValue()));
+	    }
+	    controls.selectEngine(2);
+	    controls.selectEngines(1, 2, 3);
+	  </script>
+	</binding>
+      </key>
+
+    </keyboard>
+  </input>
+
+  <fdm>
+    <jsbsim>
+      <fcs>
+	<clutch-cmd-norm n="0" type="double">1.0</clutch-cmd-norm>
+	<clutch-cmd-norm n="1" type="double">1.0</clutch-cmd-norm>
+	<reverse-cmd-norm n="0" type="double">0.0</reverse-cmd-norm>
+	<reverse-cmd-norm n="1" type="double">0.0</reverse-cmd-norm>
+      </fcs>
+    </jsbsim>
+  </fdm>
+
+  <position>
+    <ref-origin-lat type="double">0</ref-origin-lat>
+    <ref-origin-lon type="double">0</ref-origin-lon>
+    <ref-heading type="double"></ref-heading>
+  </position>
+</PropertyList>

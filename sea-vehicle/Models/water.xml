@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2013 - 2014  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <path>grid500m.ac</path>
+ <offsets>
+  <!-- x/y/z == back/right/up. -->
+  <x-m>0.00</x-m>
+  <y-m>0.00</y-m>
+  <z-m>0.00</z-m>
+ </offsets>
+
+ <!-- Wave shader -->
+ <effect>
+  <inherits-from>Aircraft/MTB_20m/Models/Effects/water</inherits-from>
+  <object-name>Water</object-name>
+ </effect>
+
+ <animation>
+  <type>translate</type>
+  <object-name>Water</object-name>
+  <property>fdm/jsbsim/hydro/height-agl-ft</property>
+  <factor>-0.3048</factor>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>Water</object-name>
+  <property>orientation/roll-deg</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>1.0</factor>
+  <center>
+   <x-m>0.00</x-m>
+   <y-m>0.00</y-m>
+   <z-m>0.00</z-m>
+  </center>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>Water</object-name>
+  <property>orientation/pitch-deg</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>-1.0</factor>
+  <center>
+   <x-m>0.00</x-m>
+   <y-m>0.00</y-m>
+   <z-m>0.00</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>Water</object-name>
+  <property>orientation/heading-deg</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>1.0</factor>
+  <center>
+   <x-m>0.00</x-m>
+   <y-m>0.00</y-m>
+   <z-m>0.00</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <condition>
+   <and>
+    <property>/sim/rendering/shaders/water</property>
+    <greater-than>
+     <property>environment/waves/amplitude-ft</property>
+     <value>0.00</value>
+    </greater-than>
+    <less-than>
+     <property>position/altitude-agl-ft</property>
+     <value>100.00</value>
+    </less-than>
+   </and>
+  </condition>
+ </animation>
+
+</PropertyList>

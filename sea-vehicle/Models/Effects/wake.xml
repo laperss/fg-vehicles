@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <particlesystem>
+  <name>Wake</name>
+  <type>normal</type>
+  <texture>smoke.png</texture>
+  <emissive>false</emissive>
+  <lighting>false</lighting>
+
+  <offsets>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>
+  </offsets>
+
+  <condition>
+   <greater-than>
+    <property>fdm/jsbsim/hydro/vbx-fps</property>
+    <value>7.0</value>
+   </greater-than>
+  </condition>
+
+  <attach>world</attach>
+
+  <placer>
+   <type>point</type>
+  </placer>
+
+  <shooter>
+   <theta-min-deg>90.0</theta-min-deg>
+   <theta-max-deg>95.0</theta-max-deg>
+   <!-- phi-min-deg>90.0</phi-min-deg>
+   <phi-max-deg>90.0</phi-max-deg -->
+   <speed-mps>
+    <value>5.0</value>
+    <spread>0.50</spread>
+   </speed-mps>
+   <rotation-speed>
+    <x-min-deg-sec>0.0</x-min-deg-sec>
+    <y-min-deg-sec>0</y-min-deg-sec>
+    <z-min-deg-sec>0</z-min-deg-sec>
+    <x-max-deg-sec>0.0</x-max-deg-sec>
+    <y-max-deg-sec>0</y-max-deg-sec>
+    <z-max-deg-sec>0</z-max-deg-sec>
+   </rotation-speed>
+  </shooter>
+
+  <counter>
+   <particles-per-sec>
+    <value>80.0</value>
+    <spread>5</spread>
+   </particles-per-sec>
+  </counter>
+
+  <!-- align>billboard</align -->
+
+  <particle>
+   <start>
+    <color>
+     <red><value>0.441</value></red>
+     <green><value>0.505</value></green>
+     <blue><value>0.540</value></blue>
+     <alpha><value>0.5</value></alpha>
+    </color>
+    <size>
+     <value>0.35</value>
+     <spread>0.2</spread>
+    </size>
+   </start>
+   <end>
+    <color>
+     <red><value>0.441</value></red>
+     <green><value>0.505</value></green>
+     <blue><value>0.540</value></blue>
+     <alpha><value>0.0</value></alpha>
+    </color>
+    <size>
+     <value>0.5</value>
+     <spread>0.2</spread>
+    </size>
+   </end>
+
+   <life-sec>
+    <value>15</value>
+   </life-sec>
+   <mass-kg>1.0</mass-kg>
+   <radius-m>0.1</radius-m>
+  </particle>
+
+  <program>
+   <fluid>water</fluid>
+   <gravity>false</gravity>
+   <wind>false</wind>
+  </program>
+
+ </particlesystem>
+
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>5000</max-m>
+ </animation>
+
+</PropertyList>

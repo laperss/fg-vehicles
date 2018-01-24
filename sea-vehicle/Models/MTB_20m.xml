@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2012 - 2016  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <path>MTB_20m.ac</path>
+ <offsets>
+  <!-- x/y/z == back/right/up. -->
+  <x-m> 0.00 </x-m>
+  <z-m> 0.00 </z-m>
+ </offsets>
+
+ <!-- Shader effects -->
+ <!-- effect>
+  <inherits-from>Effects/reflect</inherits-from>
+  <object-name></object-name>
+ </effect -->
+
+ <!-- Rembrandt transparency markup. -->
+ <!-- effect>
+  <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name></object-name>
+ </effect -->
+
+ <!-- Livery selection =====================================================-->
+ <animation>
+  <type>material</type>
+  <object-name>hull</object-name>
+  <property-base>sim/model/livery</property-base>
+  <texture-prop>texture</texture-prop>
+  <texture>Liveries/KTH.png</texture>
+ </animation>
+
+ <!-- Instruments ==========================================================-->
+ <model>
+  <name>Magnetic compass</name>
+  <path>Aircraft/Nordstern/Instruments/MagneticCompass/compass.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 9.10 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> 1.15 </z-m>
+  </offsets>
+ </model>
+
+ <!-- External lights ======================================================-->
+ <model>
+  <name>Port navigation light</name>
+  <path>Aircraft/Short_Empire/Models/Lights/RedLight.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up. -->
+   <x-m>  9.40 </x-m>
+   <y-m> -1.15 </y-m>
+   <z-m>  1.14 </z-m>
+  </offsets>
+  <overlay>
+   <parameters>
+    <rated-power type="double">1.0</rated-power> <!-- Watts -->
+    <min-power   type="double">1.0</min-power>   <!-- Watts -->
+    <current-power-property>controls/lighting/nav-lights</current-power-property>
+   </parameters>
+  </overlay>
+ </model>
+ <model>
+  <name>Starboard navigation light</name>
+  <path>Aircraft/Short_Empire/Models/Lights/GreenLight.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up. -->
+   <x-m>  9.40 </x-m>
+   <y-m>  1.15 </y-m>
+   <z-m>  1.14 </z-m>
+  </offsets>
+  <overlay>
+   <parameters>
+    <rated-power type="double">1.0</rated-power> <!-- Watts -->
+    <min-power   type="double">1.0</min-power>   <!-- Watts -->
+    <current-power-property>controls/lighting/nav-lights</current-power-property>
+   </parameters>
+  </overlay>
+ </model>
+ <model>
+  <name>Top light</name>
+  <path>Aircraft/Short_Empire/Models/Lights/WhiteLight.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up. -->
+   <x-m> 9.08 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> 4.15 </z-m>
+  </offsets>
+  <overlay>
+   <parameters>
+    <rated-power type="double">1.0</rated-power> <!-- Watts -->
+    <min-power   type="double">1.0</min-power>   <!-- Watts -->
+    <current-power-property>controls/lighting/nav-lights</current-power-property>
+   </parameters>
+  </overlay>
+ </model>
+
+ <!-- Animations ============================================================-->
+
+ <!-- Helm and rudders -->
+ <animation>
+  <type>rotate</type>
+  <object-name>wheel</object-name>
+  <object-name>wheel_spokes</object-name>
+  <property>surface-positions/rudder-pos-norm</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>-360.0</factor>
+  <center>
+   <x-m>9.60</x-m>
+   <y-m>0.00</y-m>
+   <z-m>1.20</z-m>
+  </center>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>rudder.L</object-name>
+  <property>surface-positions/rudder-pos-norm</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>60.0</factor>
+  <center>
+   <x-m>20.11</x-m>
+   <y-m>-0.76</y-m>
+   <z-m>0.00</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>rudder.R</object-name>
+  <property>surface-positions/rudder-pos-norm</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>60.0</factor>
+  <center>
+   <x-m>20.11</x-m>
+   <y-m>0.76</y-m>
+   <z-m>0.00</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <!-- Main engine throttles -->
+ <animation>
+  <type>rotate</type>
+  <object-name>ME_throttle_handle.L</object-name>
+  <object-name>ME_throttle_knob.L</object-name>
+  <property>controls/engines/engine[0]/throttle</property>
+  <offset-deg>30.0</offset-deg>
+  <factor>-90.0</factor>
+  <center>
+   <x-m>9.40</x-m>
+   <y-m>0.51</y-m>
+   <z-m>1.20</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>ME_throttle_handle.R</object-name>
+  <object-name>ME_throttle_knob.R</object-name>
+  <property>controls/engines/engine[1]/throttle</property>
+  <offset-deg>30.0</offset-deg>
+  <factor>-90.0</factor>
+  <center>
+   <x-m>9.40</x-m>
+   <y-m>0.51</y-m>
+   <z-m>1.20</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <!-- Auxiliary engine throttles -->
+ <animation>
+  <type>rotate</type>
+  <object-name>AE_throttle_handle.L</object-name>
+  <object-name>AE_throttle_knob.L</object-name>
+  <property>controls/engines/engine[2]/throttle</property>
+  <offset-deg>30.0</offset-deg>
+  <factor>-90.0</factor>
+  <center>
+   <x-m>9.40</x-m>
+   <y-m>0.67</y-m>
+   <z-m>1.33</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>AE_throttle_handle.R</object-name>
+  <object-name>AE_throttle_knob.R</object-name>
+  <property>controls/engines/engine[3]/throttle</property>
+  <offset-deg>30.0</offset-deg>
+  <factor>-90.0</factor>
+  <center>
+   <x-m>9.40</x-m>
+   <y-m>0.67</y-m>
+   <z-m>1.33</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <!-- Particle effects ======================================================-->
+ <model>
+  <name>Fore Port</name>
+  <overlay>
+   <particlesystem>
+    <shooter>
+     <phi-min-deg>-80.0</phi-min-deg>
+     <phi-max-deg>-100.0</phi-max-deg>
+    </shooter>
+   </particlesystem>
+  </overlay>
+  <path>Aircraft/MTB_20m/Models/Effects/wake.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m>  2.00 </x-m>
+   <y-m> -0.50 </y-m>
+   <z-m> -1.50 </z-m>
+  </offsets>
+ </model>
+ <model>
+  <name>Fore Starboard</name>
+  <overlay>
+   <particlesystem>
+    <shooter>
+     <phi-min-deg>80.0</phi-min-deg>
+     <phi-max-deg>100.0</phi-max-deg>
+    </shooter>
+   </particlesystem>
+  </overlay>
+  <path>Aircraft/MTB_20m/Models/Effects/wake.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m>  2.00 </x-m>
+   <y-m>  0.50 </y-m>
+   <z-m> -1.50 </z-m>
+  </offsets>
+ </model>
+
+ <animation>
+  <type>translate</type>
+  <object-name>Fore Port</object-name>
+  <object-name>Fore Starboard</object-name>
+  <property>fdm/jsbsim/hydro/vbx-fps</property>
+  <interpolation>
+   <entry><ind>0.0</ind><dep>0.0</dep></entry>
+   <entry><ind>84.0</ind><dep>-0.4</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>Fore Port</object-name>
+  <object-name>Fore Starboard</object-name>
+  <property>orientation/roll-deg</property>
+  <offset-deg>0.0</offset-deg>
+  <factor>1.0</factor>
+  <center>
+   <x-m>  0.00 </x-m>
+   <y-m>  0.00 </y-m>
+   <z-m> -1.50 </z-m>
+  </center>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>Fore Port</object-name>
+  <object-name>Fore Starboard</object-name>
+  <property>fdm/jsbsim/hydro/vbx-fps</property>
+  <interpolation>
+   <entry><ind>0.0</ind><dep>0.0</dep></entry>
+   <entry><ind>84.0</ind><dep>3.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>Fore Port</object-name>
+  <property>fdm/jsbsim/hydro/vbx-fps</property>
+  <interpolation>
+   <entry><ind>0.0</ind><dep>0.0</dep></entry>
+   <entry><ind>84.0</ind><dep>1.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>-1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>Fore Starboard</object-name>
+  <property>fdm/jsbsim/hydro/vbx-fps</property>
+  <interpolation>
+   <entry><ind>0.0</ind><dep>0.0</dep></entry>
+   <entry><ind>84.0</ind><dep>1.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <model>
+  <name>Port propeller</name>
+  <overlay>
+   <particlesystem>
+    <condition>
+     <greater-than>
+      <property>engines/propeller[1]/rpm</property>
+      <value>500.0</value>
+     </greater-than>
+    </condition>
+   </particlesystem>
+  </overlay>
+  <path>Aircraft/MTB_20m/Models/Effects/propeller_wake.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 19.70 </x-m>
+   <y-m> -0.80 </y-m>
+   <z-m> -2.00 </z-m>
+  </offsets>
+ </model>
+ <model>
+  <name>Starboard propeller</name>
+  <overlay>
+   <particlesystem>
+    <condition>
+     <greater-than>
+      <property>engines/propeller[1]/rpm</property>
+      <value>500.0</value>
+     </greater-than>
+    </condition>
+   </particlesystem>
+  </overlay>
+  <path>Aircraft/MTB_20m/Models/Effects/propeller_wake.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 19.70 </x-m>
+   <y-m>  0.80 </y-m>
+   <z-m> -2.00 </z-m>
+  </offsets>
+ </model>
+
+ <!-- Water ================================================================-->
+ <model>
+  <name>Water</name>
+  <path>Aircraft/MTB_20m/Models/water.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m>12.00</x-m>
+   <y-m>0.00</y-m>
+   <z-m>0.00</z-m>
+  </offsets>
+ </model>
+
+
+ <!-- Markers for debugging ================================================-->
+ <!-- model>
+  <name>Markers</name>
+  <path>Aircraft/MTB_20m/Models/markers.xml</path>
+  <offsets>
+   <x-m>12.00</x-m>
+   <y-m>0.00</y-m>
+   <z-m>0.00</z-m>
+  </offsets>
+ </model -->
+
+ <!-- LOD for the model as a whole =========================================-->
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>15000</max-m>
+ </animation>
+
+ <nasal>
+  <load>
+##############################################################################
+# The on-load Nasal is not executed when this file is loaded as the user
+# aircraft.
+##############################################################################
+var rplayer = cmdarg();
+print("LOAD MTB_20m", rplayer.getPath());
+
+# Set up property aliases for animations.
+#  Waves.
+rplayer.getNode("environment/waves/time-sec", 1).
+  alias(rplayer.getNode("sim/multiplay/generic/float[0]"));
+rplayer.getNode("environment/waves/from-deg", 1).
+  alias(rplayer.getNode("sim/multiplay/generic/float[1]"));
+rplayer.getNode("environment/waves/amplitude-ft", 1).
+  alias(rplayer.getNode("sim/multiplay/generic/float[2]"));
+rplayer.getNode("environment/waves/angular-frequency-rad_sec", 1).
+  alias(rplayer.getNode("sim/multiplay/generic/float[3]"));
+rplayer.getNode("environment/waves/wave-number-rad_ft", 1).
+  alias(rplayer.getNode("sim/multiplay/generic/float[4]"));
+rplayer.getNode("fdm/jsbsim/hydro/height-agl-ft", 1).
+  alias(rplayer.getNode("sim/multiplay/generic/float[5]"));
+
+# Set up livery support.
+var livery_update =
+  aircraft.livery_update.new("Aircraft/MTB_20m/Models/Liveries", 10);
+
+##############################################################################
+  </load>
+  <unload>
+##############################################################################
+var rplayer = cmdarg();
+print("UNLOAD MTB_20m ", rplayer.getPath());
+# Stop the livery support.
+livery_update.stop();
+##############################################################################
+  </unload>
+ </nasal>
+
+</PropertyList>

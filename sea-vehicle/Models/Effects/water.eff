@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2013 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+ <name>Aircraft/MTB_20m/Models/Effects/water</name>
+ <inherits-from>Effects/model-default</inherits-from>
+ <parameters>
+  <wave-time-sec><use>environment/waves/time-sec</use></wave-time-sec>
+  <waves-from-deg><use>environment/waves/from-deg</use></waves-from-deg>
+  <wave-amplitude-ft><use>environment/waves/amplitude-ft</use></wave-amplitude-ft>
+  <wave-angular-frequency-rad_sec><use>environment/waves/angular-frequency-rad_sec</use></wave-angular-frequency-rad_sec>
+  <wave-number-rad_ft><use>environment/waves/wave-number-rad_ft</use></wave-number-rad_ft>
+ </parameters>
+ <technique n="5"> <!-- Light field a.k.a atmospheric light scattering. -->
+  <predicate n="0">
+   <and n="0">
+    <property n="10">/sim/rendering/shaders/water</property>
+   </and>
+  </predicate>
+  <pass n="0">
+   <program n="0">
+    <vertex-shader n="0">Aircraft/MTB_20m/Models/Effects/water-lightfield.vert</vertex-shader>
+    <vertex-shader n="1">Aircraft/MTB_20m/Models/Effects/water-geometry.vert</vertex-shader>
+   </program>
+   <uniform n="8">
+    <name>wave_time_sec</name>
+    <type>float</type>
+    <value type="float"><use>wave-time-sec</use></value>
+   </uniform>
+   <uniform n="9">
+    <name>waves_from_deg</name>
+    <type>float</type>
+    <value type="float"><use>waves-from-deg</use></value>
+   </uniform>
+   <uniform n="10">
+    <name>wave_amplitude_ft</name>
+    <type>float</type>
+    <value type="float"><use>wave-amplitude-ft</use></value>
+   </uniform>
+   <uniform n="11">
+    <name>wave_angular_frequency_rad_sec</name>
+    <type>float</type>
+    <value type="float"><use>wave-angular-frequency-rad_sec</use></value>
+   </uniform>
+   <uniform n="12">
+    <name>wave_number_rad_ft</name>
+    <type>float</type>
+    <value type="float"><use>wave-number-rad_ft</use></value>
+   </uniform>
+  </pass>
+ </technique>
+ <technique n="11"> <!-- Standard. FIXME: Not implemented yet. -->
+  <predicate n="0">
+   <and n="0">
+    <property n="10">/sim/rendering/shaders/water</property>
+   </and>
+  </predicate>
+  <pass n="0">
+   <program n="0">
+    <vertex-shader n="1">Aircraft/MTB_20m/Models/Effects/water-lightfield.vert</vertex-shader>
+   </program>
+   <uniform n="1">
+    <name>wave_time_sec</name>
+    <type>float</type>
+    <value type="float"><use>wave-time-sec</use></value>
+   </uniform>
+   <uniform n="2">
+    <name>waves_from_deg</name>
+    <type>float</type>
+    <value type="float"><use>waves-from-deg</use></value>
+   </uniform>
+   <uniform n="3">
+    <name>wave_amplitude_ft</name>
+    <type>float</type>
+    <value type="float"><use>wave-amplitude-ft</use></value>
+   </uniform>
+   <uniform n="4">
+    <name>wave_angular_frequency_rad_sec</name>
+    <type>float</type>
+    <value type="float"><use>wave-angular-frequency-rad_sec</use></value>
+   </uniform>
+   <uniform n="5">
+    <name>wave_number_rad_ft</name>
+    <type>float</type>
+    <value type="float"><use>wave-number-rad_ft</use></value>
+   </uniform>
+   </pass>
+ </technique>
+</PropertyList>

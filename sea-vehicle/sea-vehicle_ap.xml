@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<!-- Autopilot Configuration -->
+<autopilot name="Sea Vehicle Autopilot">
+
+  <!-- INTERFACE PROPERTIES  -->
+  <property> ap/attitude_hold      </property>
+  <property value="1"> ap/heading_hold       </property>
+  <property value="1"> ap/velocity_hold      </property>
+  <property value="0"> ap/acceleration_hold      </property>
+  <property value="199"> ap/heading_setpoint   </property>
+  <property> ap/velocity_setpoint  </property>
+  <property> ap/acceleration_setpoint  </property>
+  <property> ap/elevator_cmd       </property>
+  <property> ap/throttle_cmd       </property>
+
+  <!-- ######################################################################## -->
+
+  <!-- Initial constants (can be overridden in the aircraft file) -->
+
+  <property value="0.524"> guidance/yaw-angle-limit </property>
+  <property value="0.174"> guidance/yaw-rate-limit </property>
+  <property value="0"> ap/yaw-angle-saturation </property>
+
+  <!-- #################################################################### -->
+
+  <channel name="Anti-windup">
+    <switch name="fcs/throttle-windup-trigger">
+      <default value="0.0"/>
+      <test value="-1.0">
+	ap/throttle_cmd le 0.0
+      </test>
+      <test value="1.0">
+	ap/throttle_cmd ge 0.98
+      </test>
+    </switch>
+
+    <deadband name="fcs/steering-windup-trigger">
+      <input> fcs/steer-cmd-norm </input>
+      <width>1.0</width>
+    </deadband>
+
+  </channel>
+  
+  <channel name="Heading Hold">
+    <switch name="fcs/heading-ap-on-off">
+      <default value="-1.0"/>
+      <test value="0">
+	ap/heading_hold == 1
+      </test>
+    </switch>
+
+    <!-- HEADING ERROR -->
+    <summer name="fcs/heading-error">
+      <input> -attitude/psi-rad</input>
+      <input> ap/heading_setpoint </input>
+    </summer>
+
+    <lag_filter name="Heading error lag">
+      <input> fcs/heading-error </input>
+      <c1> 15 </c1>
+    </lag_filter>
+
+    <switch name="fcs/heading-error-bias-switch">
+      <default value="0.0"/>    
+      <test value="3.1415">  
+	fcs/heading-error-lag lt -1.5708 
+      </test>   
+      <test value="-3.1415"> 
+	fcs/heading-error-lag gt 1.5708  
+      </test>
+    </switch>
+
+    <summer name="fcs/heading-corrected">
+      <input> fcs/heading-error-bias-switch </input>
+      <input> fcs/heading-error-lag </input>
+      <clipto>
+	<min> -0.45 </min>
+	<max>  0.45 </max>
+      </clipto>
+    </summer>
+
+    <!-- HEADING SWITCH -->
+    <switch name="fcs/heading-error-switch">
+      <default value="0.0"/>
+      <test value="fcs/heading-corrected">
+	ap/heading_hold == 1
+      </test>
+    </switch>
+    
+    <pid name="fcs/heading-pi-controller">
+      <input> fcs/heading-error-switch </input>
+      <kp> 4 </kp>
+      <ki> 0.0 </ki>
+      <kd> 0.7 </kd>
+      <trigger> fcs/heading-ap-on-off </trigger>
+    </pid>
+
+    <pure_gain name="fcs/rudder-cmd"> 
+      <input> fcs/heading-pi-controller </input> 
+      <gain> -1 </gain> 
+    </pure_gain> 
+
+    <switch name="fcs/roll-command-selector">
+      <default value="0.0"/>
+      <test value="fcs/rudder-cmd">
+	ap/heading_hold == 1
+      </test>
+      <output>ap/rudder_cmd</output>
+    </switch>
+  </channel>
+
+
+
+
+  <!-- =============================================================== -->
+  <!-- Velocity Modes                                                  -->
+  <!-- =============================================================== -->
+
+  <channel name="Velocity hold" execute="ap/velocity_hold">
+    
+    <summer name="fcs/velocity-error">
+      <input> ap/velocity_setpoint </input>
+      <input> -velocities/vt-fps </input>
+      <clipto>
+	<min>-20</min>
+	<max> 20</max>
+      </clipto>
+    </summer>
+
+    <pid name="fcs/velocity-to-acceleration-cmd">
+      <input> fcs/velocity-error </input>
+      <kp> 0.3 </kp>
+      <ki> 0.0 </ki>
+      <kd> 0.0 </kd>
+      <trigger> fcs/throttle-windup-trigger </trigger>
+      <!-- Maximum acceleration: 4.5 m/s2 => 15 ft/s2-->
+      <clipto>
+	<min>-15</min>
+	<max> 15</max>
+      </clipto>
+    </pid>
+  </channel>
+  
+  <!--========= ACCELERATION HOLD (P-controller) ===========-->
+  <channel name="Acceleration Hold">
+
+    <switch name="fcs/acceleration-cmd-switch">
+      <default value="0.0"/>
+      <test value="ap/acceleration_setpoint">
+	ap/acceleration_hold == 1
+      </test>
+      <test value="fcs/velocity-to-acceleration-cmd">
+	ap/velocity_hold == 1
+      </test>      
+      <output>fcs/acceleration-cmd-switch</output>
+    </switch>
+
+    <summer name="fcs/acceleration-error">
+      <input> fcs/acceleration-cmd-switch </input>
+      <input> -accelerations/udot-ft_sec2 </input>
+      <clipto>
+	<min>-15</min>
+	<max> 15</max>
+      </clipto>
+    </summer>
+
+    <lag_filter name="fcs/acc-error-lag">
+      <input> fcs/acceleration-error </input>
+      <c1> 15 </c1>
+    </lag_filter>
+
+
+    <pid name="fcs/acceleration-pid">
+      <input> fcs/acc-error-lag </input>
+      <kp> 0.7 </kp>
+      <ki> 0.05 </ki>
+      <kd> 0.0 </kd>
+      <trigger> fcs/throttle-windup-trigger </trigger>
+      <clipto>
+	<min>0</min>
+	<max> 2</max>
+      </clipto>
+    </pid>
+
+
+    <fcs_function name="fcs/thrust-cmd">
+      <function>
+	<product>
+	  <property>fcs/acceleration-pid</property>
+	  <property>inertia/weight-kg</property>
+	</product>
+      </function>
+    </fcs_function>
+
+    <fcs_function name="fcs/thrust_m-cmd">
+      <function>
+	<product>
+	  <property>fcs/acceleration-pid</property>
+	  <value>1.0</value>
+	</product>
+      </function>
+    </fcs_function>
+
+  </channel>
+
+
+  <!-- INNER THRUST LOOP -->
+  <!-- =============================================================== -->
+  <channel name="Thrust inner loop">
+    
+    <fcs_function name="fcs/thrust_m">
+      <function>
+	<quotient> 
+	  <property>propulsion/thrust-propellers-N</property>
+	  <product>
+	    <property>inertia/weight-kg</property>
+	    <value>1.0</value>
+	  </product>
+	</quotient>
+      </function>
+    </fcs_function>
+
+    <summer name="fcs/thrust_m-error">
+      <input> fcs/thrust_m-cmd </input>
+      <input> -fcs/thrust_m </input>
+    </summer>
+
+    <pid name="fcs/thrust-pid">
+      <input> fcs/thrust_m-error </input>
+      <kp> 0.5 </kp>
+      <ki> 0.05 </ki>
+      <kd> 0   </kd>
+      <trigger> fcs/throttle-windup-trigger </trigger>
+    </pid>
+
+    <!-- The thrust required to keep the current velocity/acceleration -->
+    <fcs_function name = "Throttle Feedforward">
+      <function> 
+	<sum>
+	  <property>fcs/thrust-pid</property>
+	  <table>   
+	    <independentVar lookup="row">propulsion/thrust-propellers-N</independentVar>
+	    <tableData>
+	      0       0.1
+	      1000    0.25
+	      1700    0.36     <!-- 10 -->
+	      3720    0.64     <!-- 20 -->
+	      4430    0.70     <!-- 30 -->
+	      5215    0.78     <!-- 40 -->
+	      5735    0.825     <!-- 50 -->
+	      5963    0.855     <!-- 60 -->
+	      6421    0.985     <!-- 70 -->
+	      7500    1.0     <!-- 80 -->
+	    </tableData>
+	  </table>
+	</sum>
+      </function>
+      <clipto> <min> 0.0</min>
+      <max> 1.0</max> </clipto>
+    </fcs_function>
+
+
+    
+    <fcs_function name="ap/throttle_cmd">
+      <function>
+	<min>
+          <property>fcs/throttle-feedforward</property>
+	  <product>
+            <sum>
+              <property>velocities/vt-fps</property>
+              <value>1.0</value>
+            </sum>
+	    <value>0.1</value>
+	  </product>
+	</min>
+      </function>
+      <output>ap/throttle_cmd</output>
+    </fcs_function>
+    
+  </channel>
+  
+</autopilot>

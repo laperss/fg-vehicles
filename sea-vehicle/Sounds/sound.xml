@@ -1,0 +1,558 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat.
+
+  Copyright (C) 2012 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <!--
+   x/y/z == back/left/up
+   Coordinate system origin at the 3d model origin, i.e. at the FDM origin.
+ -->
+
+ <fx>
+
+  <!-- ========================================================================
+    Engine 1. (Port main engine)
+  -->
+  <crank>
+   <name>engstart1</name>
+   <path>Sounds/engstart.wav</path>
+   <condition>
+    <property>engines/engine[0]/cranking</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y>  1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <offset>0.1</offset>
+    <max>0.01</max>
+   </volume>
+  </crank>
+
+  <crank>
+   <name>crank1</name>
+   <mode>looped</mode>
+   <path>Sounds/cranking.wav</path>
+   <condition>
+    <and>
+     <property>engines/engine[0]/cranking</property>
+     <not>
+      <property>engines/engine[0]/running</property>
+     </not>
+    </and>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y>  1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <offset>-0.5</offset>
+   </volume>
+   <pitch>
+    <property>engines/engine[0]/cranking</property>
+    <factor>1.0</factor>
+   </pitch>
+  </crank>
+
+  <crank>
+   <name>cough1</name>
+   <path>Sounds/coughing.wav</path>
+   <condition>
+    <property>engines/engine[0]/running</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y>  1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <offset>0.3</offset>
+   </volume>
+  </crank>
+
+  <engine>
+   <name>engine1</name>
+   <mode>looped</mode>
+   <path>Aircraft/p51d/Sounds/p51d_rpm1.wav</path>
+   <condition>
+    <property>engines/engine[0]/running</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y>  1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <property>engines/engine[0]/mp-inhg</property>
+    <factor>0.025</factor>
+    <min>1.0</min>
+    <max>3.0</max>
+    <offset>0.0</offset>
+   </volume>
+   <volume>
+    <property>/engines/engine[0]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.2</min>
+    <max>1.0</max>
+    <offset>0.0</offset>
+   </volume>
+   <pitch>
+    <property>engines/engine[0]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.1</min>
+    <max>1.0</max>
+    <offset>0.0</offset>
+   </pitch>
+  </engine>
+
+  <engine>
+   <name>enginerun1</name>
+   <mode>looped</mode>
+   <path>Sounds/wasp.wav</path>
+   <condition>
+    <property>/engines/engine[0]/running</property>
+    <greater-than>
+    <property>/engines/engine[0]/rpm</property>
+    <value>400</value>
+    </greater-than>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y>  1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <property>/engines/engine[0]/mp-inhg</property>
+    <offset>0.0</offset>
+    <factor>0.025</factor>  
+    <min>1.0</min>
+    <max>3.0</max>
+   </volume>
+   <volume>
+    <property>/engines/engine[0]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>1.00</max>
+    <offset>0.0</offset>
+   </volume>
+   <pitch>
+    <property>/engines/engine[0]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>1.0</max>
+   </pitch>
+  </engine>
+
+  <!-- ========================================================================
+    Engine 2. (Starboard main engine)
+  -->
+  <crank>
+   <name>engstart2</name>
+   <path>Sounds/engstart.wav</path>
+   <condition>
+    <property>engines/engine[1]/cranking</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y> -1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <offset>0.1</offset>
+    <max>0.01</max>
+   </volume>
+  </crank>
+
+  <crank>
+   <name>crank2</name>
+   <mode>looped</mode>
+   <path>Sounds/cranking.wav</path>
+   <condition>
+    <and>
+     <property>engines/engine[1]/cranking</property>
+     <not>
+      <property>engines/engine[1]/running</property>
+     </not>
+    </and>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y> -1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <offset>-0.5</offset>
+   </volume>
+   <pitch>
+    <property>engines/engine[1]/cranking</property>
+    <factor>1.0</factor>
+   </pitch>
+  </crank>
+
+  <crank>
+   <name>cough2</name>
+   <path>Sounds/coughing.wav</path>
+   <condition>
+    <property>engines/engine[1]/running</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y> -1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <offset>0.3</offset>
+   </volume>
+  </crank>
+
+  <engine>
+   <name>engine2</name>
+   <mode>looped</mode>
+   <path>Aircraft/p51d/Sounds/p51d_rpm1.wav</path>
+   <condition>
+    <property>engines/engine[1]/running</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y> -1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <property>engines/engine[1]/mp-inhg</property>
+    <factor>0.025</factor>
+    <min>1.0</min>
+    <max>3.0</max>
+    <offset>0.0</offset>
+   </volume>
+   <volume>
+    <property>/engines/engine[1]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.2</min>
+    <max>1.0</max>
+    <offset>0.0</offset>
+   </volume>
+   <pitch>
+    <property>engines/engine[1]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.1</min>
+    <max>1.0</max>
+    <offset>0.0</offset>
+   </pitch>
+  </engine>
+
+  <engine>
+   <name>enginerun2</name>
+   <mode>looped</mode>
+   <path>Sounds/wasp.wav</path>
+   <condition>
+    <property>/engines/engine[1]/running</property>
+    <greater-than>
+    <property>/engines/engine[1]/rpm</property>
+    <value>400</value>
+    </greater-than>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 12.00 </x>
+    <y> -1.00 </y>
+    <z> -1.00 </z>
+   </position>
+   <volume>
+    <property>/engines/engine[1]/mp-inhg</property>
+    <offset>0.0</offset>
+    <factor>0.025</factor>  
+    <min>1.0</min>
+    <max>3.0</max>
+   </volume>
+   <volume>
+    <property>/engines/engine[1]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>1.00</max>
+    <offset>0.0</offset>
+   </volume>
+   <pitch>
+    <property>/engines/engine[1]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>1.0</max>
+   </pitch>
+  </engine>
+
+  <!-- ========================================================================
+    Engine 3. (Port auxilary engine)
+  -->
+  <crank>
+   <name>engstart3</name>
+   <path>Sounds/engstart.wav</path>
+   <condition>
+    <property>engines/engine[2]/cranking</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y>  1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <offset>0.0</offset>
+    <max>0.01</max>
+   </volume>
+  </crank>
+
+  <crank>
+   <name>crank3</name>
+   <mode>looped</mode>
+   <path>Sounds/cranking.wav</path>
+   <condition>
+    <and>
+     <property>engines/engine[2]/cranking</property>
+     <not>
+      <property>engines/engine[2]/running</property>
+     </not>
+    </and>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y>  1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <offset>-0.7</offset>
+   </volume>
+   <pitch>
+    <property>engines/engine[2]/cranking</property>
+    <factor>1.0</factor>
+   </pitch>
+  </crank>
+
+  <crank>
+   <name>cough3</name>
+   <path>Sounds/coughing.wav</path>
+   <condition>
+    <property>engines/engine[2]/running</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y>  1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <offset>0.2</offset>
+   </volume>
+  </crank>
+
+  <engine>
+   <name>enginerun3</name>
+   <mode>looped</mode>
+   <path>Sounds/wasp.wav</path>
+   <condition>
+    <property>/engines/engine[2]/running</property>
+    <greater-than>
+    <property>/engines/engine[2]/rpm</property>
+    <value>400</value>
+    </greater-than>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y>  1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <property>/engines/engine[2]/mp-inhg</property>
+    <offset>0.0</offset>
+    <factor>0.025</factor>  
+    <min>1.0</min>
+    <max>3.0</max>
+   </volume>
+   <volume>
+    <property>/engines/engine[2]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>0.80</max>
+    <offset>0.0</offset>
+   </volume>
+   <pitch>
+    <property>/engines/engine[2]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>1.0</max>
+   </pitch>
+  </engine>
+
+  <!-- ========================================================================
+    Engine 3. (Starboard auxilary engine)
+  -->
+  <crank>
+   <name>engstart4</name>
+   <path>Sounds/engstart.wav</path>
+   <condition>
+    <property>engines/engine[3]/cranking</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y> -1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <offset>0.0</offset>
+    <max>0.01</max>
+   </volume>
+  </crank>
+
+  <crank>
+   <name>crank4</name>
+   <mode>looped</mode>
+   <path>Sounds/cranking.wav</path>
+   <condition>
+    <and>
+     <property>engines/engine[3]/cranking</property>
+     <not>
+      <property>engines/engine[3]/running</property>
+     </not>
+    </and>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y> -1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <offset>-0.7</offset>
+   </volume>
+   <pitch>
+    <property>engines/engine[3]/cranking</property>
+    <factor>1.0</factor>
+   </pitch>
+  </crank>
+
+  <crank>
+   <name>cough4</name>
+   <path>Sounds/coughing.wav</path>
+   <condition>
+    <property>engines/engine[3]/running</property>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y> -1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <offset>0.2</offset>
+   </volume>
+  </crank>
+
+  <engine>
+   <name>enginerun4</name>
+   <mode>looped</mode>
+   <path>Sounds/wasp.wav</path>
+   <condition>
+    <property>/engines/engine[3]/running</property>
+    <greater-than>
+    <property>/engines/engine[3]/rpm</property>
+    <value>400</value>
+    </greater-than>
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x> 14.00 </x>
+    <y>  1.00 </y>
+    <z> -1.20 </z>
+   </position>
+   <volume>
+    <property>/engines/engine[3]/mp-inhg</property>
+    <offset>0.0</offset>
+    <factor>0.025</factor>  
+    <min>1.0</min>
+    <max>3.0</max>
+   </volume>
+   <volume>
+    <property>/engines/engine[3]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>0.80</max>
+    <offset>0.0</offset>
+   </volume>
+   <pitch>
+    <property>/engines/engine[3]/rpm</property>
+    <factor>0.0004</factor>
+    <min>0.0</min>
+    <max>1.0</max>
+   </pitch>
+  </engine>
+
+  <!-- ========================================================================
+    Water sounds. Depends on the c172p.
+  -->
+  <hull-in-water>
+   <name>hull-in-water</name>
+   <mode>looped</mode>
+   <path>Aircraft/c172p/Sounds/water-still.wav</path>
+   <condition>
+    <greater-than>
+     <property>/fdm/jsbsim/hydro/v-kt</property>
+     <value>0</value>
+    </greater-than>
+   </condition>
+   <position>
+    <x>10.0</x>
+    <y>0.0</y>
+    <z>-1.5</z>
+   </position>
+   <reference-dist>5.0</reference-dist>
+   <max-dist>25.0</max-dist>
+   <volume>
+    <offset>0.3</offset>
+   </volume>
+  </hull-in-water>
+
+  <at-speed-in-water>
+   <name>at-speed-in-water</name>
+   <mode>looped</mode>
+   <path>Aircraft/c172p/Sounds/water-fast.wav</path>
+   <condition>
+    <greater-than>
+     <property>/fdm/jsbsim/hydro/v-kt</property>
+     <value>5</value>
+    </greater-than>
+   </condition>
+   <position>
+    <x>6.0</x>
+    <y>0.0</y>
+    <z>-2.0</z>
+   </position>
+   <reference-dist>10.0</reference-dist>
+   <max-dist>50.0</max-dist>
+   <volume>
+    <property>/fdm/jsbsim/hydro/v-kt</property>
+    <factor>0.05</factor>
+    <offset>0.1</offset>
+    <min>0.1</min>
+    <max>2.0</max>
+   </volume>
+  </at-speed-in-water>
+
+ </fx>
+
+</PropertyList>

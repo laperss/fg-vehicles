@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+  Swedish Navy 20m-class motor torpedo boat for FlightGear.
+
+  Copyright (C) 2012 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <title>Royal Swedish Navy motor torpedo boat of the T21 - T31 class</title>
+ <!-- Specific keys -->
+ <key>
+  <name>q/Q</name>
+  <desc>Engage/disengage the clutches for the main engines.</desc>
+ </key>
+ <key>
+  <name>e/E</name>
+  <desc>Engage/disengage the clutches for the auxiliary engines.</desc>
+ </key>
+ <!-- key>
+  <name>r/R</name>
+  <desc>Dis/engage the reversing gear for the auxiliary engines.</desc>
+ </key -->
+
+ <key>
+  <name>w</name>
+  <desc>Walk view: walk forward, +shift to run.</desc>
+ </key>
+ <key>
+  <name>s</name>
+  <desc>Walk view: walk backward.</desc>
+ </key>
+ <key>
+  <name>a</name>
+  <desc>Walk view: side step left, +shift to run.</desc>
+ </key>
+ <key>
+  <name>d</name>
+  <desc>Walk view: side step right, +shift to run.</desc>
+ </key>
+
+ <!-- Handling instructions. -->
+ <text>
+ _______________Main Engine Start_________________
+ 1. Disengage the main engine clutches (Q).
+    (This action also selects the two main engines.)
+ 2. Mixture rich.
+ 3. Magnetos BOTH.
+ 4. Start the engines.
+ 5. Engage the main engine clutches (q).
+    (This action also selects the two main engines.)
+
+ ______________Auxiliary Engine Start_____________
+ 1. Disengage the auxiliary engine clutches (E).
+    (This action also selects the two auxiliary engines.)
+ 2. Mixture rich.
+ 3. Magnetos BOTH.
+ 4. Start the engines.
+ 5. Engage the auxiliary engine clutches (e).
+    (This action also selects the two auxiliary engines.)
+
+ <!-- Real data -->
+ ________________Main Engine Limits_______________
+                        Maximum RPM
+ Max 10 minutes        2000
+ Max 30 minutes        1875
+ Max continuous        1750
+
+ <!-- And for your own safety.. -->
+ Max speed             50 kts
+
+ ________________FlightGear Pilot's Notes_______________
+
+ http://wiki.flightgear.org/Swedish_Navy_T21_class_MTB
+ </text>
+</PropertyList>

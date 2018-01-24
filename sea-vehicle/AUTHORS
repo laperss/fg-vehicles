@@ -1,0 +1,18 @@
+Anders Gidenstam  (anders(at)gidenstam.org)
+  - MTB_20m FlightGear configuration
+  - MTB_20m Flight Dynamics Model configuration
+  - MTB_20m 3d model
+
+The model borrows content from the following authors' contributions
+to FlightGear:
+
+Thorsten Renk
+ - The ALS part of the water vertex shader is based on
+   fgdata/Shaders/generic-ALS-base.vert.
+
+Dependencies (i.e. install these aircraft):
+
+Aircraft/Nordstern      (Instruments/MagneticCompass/compass.xml)
+Aircraft/Short_Empire   (Models/Lights/{Red,Green,White}Light.xml)
+Aircraft/c172p          (Sounds/{water-still,water-fast}.wav
+Aircraft/p51d           (Sounds/p51d_rpm1.wav)
